@@ -1,0 +1,29 @@
+[build-system]
+requires = ["flit_core>=3.4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "otomodachi"
+version = "0.0.1"
+authors = [
+  { name="Filip Svoboda", email="filip.svoboda@gmail.com" },
+]
+description = "Omron PLC Connectivity Library"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "cryptography",
+    "hexdump",
+    "requests",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/FilipSvoboda/otomodachi"
+"Bug Tracker" = "https://github.com/FilipSvoboda/otomodachi/issues"
+
