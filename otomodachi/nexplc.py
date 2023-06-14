@@ -4,7 +4,7 @@ from collections.abc import Iterable
 import json
 import logging
 import tempfile
-
+import re
 
 from .nexauth import NexAuth
 
@@ -574,11 +574,11 @@ class NexPLC:
         ## "mujnovyfolder/",,1980-01-01:09:00:00,777 "druhyadresar/",,1980-01-01:09:00:00,777 *
         ## '"mydir/",,1980-01-01:09:00:00,777 "mydir2/",,1980-01-01:09:00:00,777 "my dir with sspaces/",,1980-01-01:09:00:00,777 *'
         r = self.cpu_fcgi.post(f'MemoryCard_listdir {cardid},"{path}"')
-        records = re.findall('"[^"]*"', r.text)
+        records = re.findall('"[^"]*"[^ ]+', r.text)
         names = []
         for rec in records:
             name, _, timestamp, mode, *_ = rec.split(',')
-            names.append(name)
+            names.append(name.lstrip('"').rstrip('"'))
         return names
 
     def MemoryCard_getFileInfo(self, path, cardid=1):
